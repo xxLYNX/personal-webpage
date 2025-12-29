@@ -1,0 +1,26 @@
+# Tech stack carousel - row1 scrolls left, row2 scrolls right
+# Icons from https://devicon.dev/
+
+# Top carousel row
+row1 = [
+  { icon = "devicon-python-plain", name = "Python" },
+  { icon = "devicon-javascript-plain", name = "JavaScript" },
+  { icon = "devicon-typescript-plain", name = "TypeScript" },
+  { icon = "devicon-go-plain", name = "Go" },
+  { icon = "devicon-rust-original", name = "Rust" },
+  { icon = "devicon-java-plain", name = "Java" },
+  { icon = "devicon-cplusplus-plain", name = "C++" },
+  { icon = "devicon-html5-plain", name = "HTML5" }
+]
+
+# Bottom carousel row
+row2 = [
+  { icon = "devicon-react-original", name = "React" },
+  { icon = "devicon-nodejs-plain", name = "Node.js" },
+  { icon = "devicon-docker-plain", name = "Docker" },
+  { icon = "devicon-kubernetes-plain", name = "Kubernetes" },
+  { icon = "devicon-postgresql-plain", name = "PostgreSQL" },
+  { icon = "devicon-mongodb-plain", name = "MongoDB" },
+  { icon = "devicon-redis-plain", name = "Redis" },
+  { icon = "devicon-nginx-original", name = "Nginx" }
+]

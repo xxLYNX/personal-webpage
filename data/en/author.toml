@@ -1,6 +1,6 @@
 [author]
-  name = "John Doe"
-  location = "Your Location"
+  name = "Cullen Kelley"
+  location = "Reston VA"
   description = "Welcome to my personal website and portfolio"
   profile_image = "/images/profile_placeholder.jpg" # Place your profile image in static/images/
   
