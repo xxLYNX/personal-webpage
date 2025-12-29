@@ -1,0 +1,3 @@
+[submodule "themes/hugo-void"]
+	path = themes/hugo-void
+	url = https://github.com/xxLYNX/hugo-void.git

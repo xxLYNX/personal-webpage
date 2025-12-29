@@ -1,0 +1,11 @@
+[author]
+  name = "John Doe"
+  location = "Your Location"
+  description = "Welcome to my personal website and portfolio"
+  profile_image = "/images/profile_placeholder.jpg" # Place your profile image in static/images/
+  
+  # Social links
+  github = "https://github.com/johndoe"
+  twitter = "https://twitter.com/johndoe"
+  linkedin = "https://linkedin.com/in/johndoe"
+  email = "john.doe@example.com"
