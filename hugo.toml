@@ -7,6 +7,9 @@ theme = 'hugo-void' # Forked from hugo-noir
 relativeURLs = true
 canonifyURLs = true
 
+# Git integration for automatic lastmod timestamps
+enableGitInfo = true
+
 # Multilingual configuration
 # If you want to use multiple languages, uncomment and configure the [languages] section below.
 # Ensure you have corresponding content directories (e.g., content/en, content/es)
