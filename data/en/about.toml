@@ -1,0 +1,46 @@
+[[honors]]
+  title = "Academic Excellence Award"
+  institution = "Tech University"
+  date = "May 2024"
+
+[[honors]]
+  title = "Research Innovation Prize"
+  institution = "Tech University"
+  date = "December 2023"
+
+[[certifications]]
+  title = "Professional ML Certification"
+  url = "https://cert.example.com/ml"
+  date = "March 2025"
+
+[[certifications]]
+  title = "Cloud Architecture Certification"
+  url = "https://cert.example.com/cloud"
+  date = "January 2025"
+
+[[certifications]]
+  title = "Data Science Specialization"
+  url = "https://cert.example.com/ds"
+  date = "September 2024"
+
+[[voluntary]]
+  organization = "Tech Education Initiative"
+  url = "https://volunteer.example.com/org1"
+  role = "Technical Mentor"
+  period = "2023 - Present"
+  description = "Mentoring students in software development and machine learning projects."
+
+[[voluntary]]
+  organization = "Open Source Community"
+  url = "https://volunteer.example.com/org2"
+  role = "Core Contributor"
+  period = "2022 - Present"
+  description = "Contributing to open source projects and helping maintain community repositories."
+
+[[research]]
+  title = "Advanced Financial Reasoning at Scale: A Comprehensive Evaluation of Large Language Models on CFA Level III"
+  url = "https://arxiv.org/abs/example"
+  date = "2025"
+  authors = "Author Name, Co-Author One, Co-Author Two, Co-Author Three, Co-Author Four, Co-Author Five"
+  abstract = "The abstract states that financial institutions are increasingly adopting Large Language Models (LLMs), making rigorous domain-specific evaluation critical. This paper presents a comprehensive benchmark evaluating 23 state-of-the-art LLMs on the Chartered Financial Analyst (CFA) Level III exam, which is the gold standard for advanced financial reasoning. The evaluation reveals that leading models demonstrate strong capabilities, with composite scores such as 79.1% (o4-mini) and 77.3% (Gemini 2.5 Flash) on CFA Level III. These results indicate significant progress in LLM capabilities for high-stakes financial applications and provide crucial guidance for practitioners on model selection, while also highlighting remaining challenges in cost-effective deployment and the need for nuanced interpretation of performance against professional benchmarks."
+

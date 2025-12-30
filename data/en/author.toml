@@ -1,11 +1,13 @@
 [author]
   name = "Cullen Kelley"
-  location = "Reston VA"
-  description = "Welcome to my personal website and portfolio"
-  profile_image = "/images/profile_placeholder.jpg" # Place your profile image in static/images/
+  location = "Reston, VA"
+  description = "AI Developer. ML Engineer. I finetune models, build scalable pipelines and automate workflows."
+  profile_image = "https://via.placeholder.com/200/1e293b/94a3b8?text=CK"
   
   # Social links
-  github = "https://github.com/johndoe"
-  twitter = "https://twitter.com/johndoe"
-  linkedin = "https://linkedin.com/in/johndoe"
-  email = "john.doe@example.com"
+  github = "https://github.example.com"
+  twitter = "https://x.example.com"
+  linkedin = "https://linkedin.example.com"
+  email = "contact@example.com"
+  discord = "username#1234"
+  github_username = "username"

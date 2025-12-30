@@ -1,0 +1,58 @@
+[[experience]]
+  company = "GoodFin"
+  company_link = "https://goodfin.example.com"
+  role = "AI Engineer Intern"
+  period = "May 2025 - Aug 2025"
+  country = "United States"
+  responsibilities = [
+    "Developing a novel AI agent leveraging Graph RAG to tackle complex CFA-level financial tasks",
+    "Built end-to-end Benchmark of 20+ LLMs for financial analysis using advanced metrics",
+    "Implemented full-cycle research data workflows from processing extensive JSON datasets"
+  ]
+  technologies = ["Python", "LangChain", "Neo4j", "FastAPI", "Docker"]
+
+[[experience]]
+  company = "Marva.ai"
+  company_link = "https://marva-ai.example.com"
+  role = "ML Engineer Intern"
+  period = "June 2023 - Aug 2023"
+  country = "India"
+  responsibilities = [
+    "Developed financial stock prediction models integrating advanced deep learning techniques",
+    "Enhanced buy/sell signal accuracy with hybrid Ichimoku Cloud strategies and refined LSTM models",
+    "Leveraged FinBERT and LLM-powered sentiment analysis, boosting stock prediction precision by 20%",
+    "Engineered real-time data visualizations using Plotly, Dash, and Streamlit"
+  ]
+  technologies = ["Python", "TensorFlow", "PyTorch", "Plotly", "Dash", "Streamlit"]
+
+[[experience]]
+  company = "Knowledge Solutions"
+  role = "ML Research Intern"
+  period = "Sept 2021 - Nov 2021"
+  country = "India"
+  responsibilities = [
+    "Designed and deployed a scalable ML pipeline for insurance claim cost prediction",
+    "Optimized big data processing with PySpark and Dask, reducing computation time by 50%",
+    "Integrated AutoML for hyperparameter tuning, enhancing model performance",
+    "Developed interactive dashboards using Power BI and Streamlit"
+  ]
+  technologies = ["Python", "PySpark", "Dask", "scikit-learn", "Power BI", "Azure ML"]
+
+[[experience]]
+  company = "Laugh Out Loud Ventures"
+  role = "SEO Analytics Intern"
+  period = "Feb 2020 - March 2020"
+  country = "India"
+  responsibilities = [
+    "Led a sales team in transitioning to digital advertising during the pandemic",
+    "Optimized Google Ads and Facebook Ads strategies to drive higher conversions",
+    "Utilized Google Analytics and CRM tools to refine targeting"
+  ]
+  technologies = ["Google Analytics", "Google Ads", "Facebook Ads", "SEMrush"]
+
+[[experience]]
+  company = "GitHub"
+  company_link = "https://github.example.com"
+  role = "Open Source Contributor"
+  period = "Jun 2024 - Now"
+  description = "Contributed to langchain, huggingface, raycast, and other open source projects"

@@ -1,0 +1,20 @@
+[[projects]]
+  title = "Browser Extension Project"
+  description = "A Chrome extension that celebrates your problem-solving successes with custom media. When you solve a coding problem, the extension detects your success and displays a celebration overlay with your chosen media."
+  tech = "JavaScript,CSS,HTML"
+  image = "/images/project-placeholder.jpg"
+  link = "https://example.com/project1"
+
+[[projects]]
+  title = "Hugo Theme"
+  description = "A clean, minimalistic theme for Hugo with a focus on readability, simplicity, and multilingual support."
+  tech = "Hugo,Tailwind CSS,JavaScript,Go"
+  image = "/images/project-placeholder.jpg"
+  link = "https://example.com/project2"
+
+[[projects]]
+  title = "ML Pipeline Tool"
+  description = "An automated machine learning pipeline tool for data preprocessing, model training, and deployment with integrated monitoring."
+  tech = "Python,Docker,TensorFlow"
+  image = "/images/project-placeholder.jpg"
+  link = "https://example.com/project3"
