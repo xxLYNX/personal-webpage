@@ -3,6 +3,6 @@ title: "About Me"
 layout: "about"
 ---
 
-I'm an AI Developer and ML Engineer specializing in building intelligent systems, fine-tuning large language models, and creating scalable machine learning pipelines. My work focuses on applying cutting-edge AI technologies to solve real-world problems.
+I'm a fresh graduate from George Mason University with a masters in cybersecurity applied information technology with a focus on malware development. Beyond security I enjoy programming and throughout my university experience have led numerious projects many of which are showcased here on this site. Some standouts include an ML anti-virus classification engine, bundle adjustment algorithm research, and biometric modalities authentication research.
 
-With a strong foundation in computer science and hands-on experience in production ML systems, I've contributed to various projects ranging from natural language processing to computer vision. I'm passionate about making AI more accessible and efficient through research and open-source contributions.
+My passion is security and engineering a more secure tomorrow.
