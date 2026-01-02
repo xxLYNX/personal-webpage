@@ -41,9 +41,13 @@ defaultContentLanguageInSubdir = true # Creates URLs like /en/blog/
         name = "Blog"
         pageRef = "/blogs" # Assumes a section named 'blogs'
         weight = 4
+      # [[languages.en.menu.main]]
+      #   name = "Research"
+      #   pageRef = "/research"
+      #   weight = 5
       [[languages.en.menu.main]]
-        name = "Research"
-        pageRef = "/research"
+        name = "Resume"
+        pageRef = "/resume"
         weight = 5
       [[languages.en.menu.main]]
         name = "Tags"
