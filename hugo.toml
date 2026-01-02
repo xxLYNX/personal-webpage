@@ -46,9 +46,13 @@ defaultContentLanguageInSubdir = true # Creates URLs like /en/blog/
         pageRef = "/research"
         weight = 5
       [[languages.en.menu.main]]
+        name = "Tags"
+        pageRef = "/tags"
+        weight = 6
+      [[languages.en.menu.main]]
         name = "Contact"
         pageRef = "/contact"
-        weight = 6
+        weight = 7
 
   # Example for Spanish (es) - uncomment and adapt if needed
   # [languages.es]
