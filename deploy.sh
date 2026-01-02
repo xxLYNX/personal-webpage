@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e  # Exit on any error
 
-echo "🚀 Starting deployment process..."
+echo "Starting deployment process..."
 
 # Colors for output
 GREEN='\033[0;32m'
