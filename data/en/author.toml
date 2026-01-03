@@ -1,13 +1,13 @@
 [author]
   name = "Cullen Kelley"
   location = "Reston, VA"
-  description = "AI Developer. ML Engineer. I finetune models, build scalable pipelines and automate workflows."
-  profile_image = "https://via.placeholder.com/200/1e293b/94a3b8?text=CK"
+  description = "Fresh cybersecurity masters graduate "
+  profile_image = "/images/SquareSmall.jpg"
   
   # Social links
-  github = "https://github.example.com"
-  twitter = "https://x.example.com"
-  linkedin = "https://linkedin.example.com"
+  github = "https://github.xxLYNX.com"
+  twitter = "https://x.com/ckelleyexe"
+  linkedin = "https://www.linkedin.com/in/cullen-kelley/"
   email = "contact@example.com"
-  discord = "username#1234"
+  discord = "lynx0072"
   github_username = "xxLYNX"

@@ -1,6 +1,7 @@
 ---
 title: "Experience"
 layout: "experience"
+draft: true
 ---
 
 Throughout my career, I've had the opportunity to work with cutting-edge technologies and contribute to impactful projects. From researching LLM applications to building ML pipelines, each role has strengthened my expertise in artificial intelligence and software engineering.
