@@ -4,7 +4,7 @@ date: 2025-12-30T00:00:00-05:00
 lastmod: 2025-12-30T00:00:00-05:00
 draft: false
 tags: ["JavaScript", "CSS", "HTML", "Chrome Extension"]
-image: "/images/project-placeholder.jpg"
+image: "/images/projects/project-placeholder.jpg"
 description: "A Chrome extension that celebrates your problem-solving successes with custom media. When you solve a coding problem, the extension detects your success and displays a celebration overlay with your chosen media."
 github: "https://github.com/yourusername/browser-extension"
 demo: "https://example.com/demo"

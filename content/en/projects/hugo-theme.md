@@ -4,7 +4,7 @@ date: 2025-12-29T00:00:00-05:00
 lastmod: 2025-12-29T00:00:00-05:00
 draft: false
 tags: ["Hugo", "Tailwind CSS", "JavaScript", "Go Templates"]
-image: "/images/project-placeholder.jpg"
+image: "/images/projects/project-placeholder.jpg"
 description: "A clean, minimalistic theme for Hugo with a focus on readability, simplicity, and multilingual support."
 github: "https://github.com/yourusername/hugo-theme"
 demo: "https://themes.gohugo.io/themes/your-theme/"

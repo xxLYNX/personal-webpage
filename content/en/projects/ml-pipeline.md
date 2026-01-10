@@ -4,7 +4,7 @@ date: 2025-12-28T00:00:00-05:00
 lastmod: 2025-12-28T00:00:00-05:00
 draft: false
 tags: ["Python", "Docker", "TensorFlow", "MLOps", "Machine Learning"]
-image: "/images/project-placeholder.jpg"
+image: "/images/projects/project-placeholder.jpg"
 description: "An automated machine learning pipeline tool for data preprocessing, model training, and deployment with integrated monitoring."
 github: "https://github.com/yourusername/ml-pipeline"
 weight: 3
