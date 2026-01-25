@@ -4,21 +4,25 @@
 # Top carousel row
 row1 = [
   { icon = "devicon-python-plain", name = "Python" },
-  { icon = "devicon-javascript-plain", name = "JavaScript" },
-  { icon = "devicon-typescript-plain", name = "TypeScript" },
   { icon = "devicon-go-plain", name = "Go" },
-  { icon = "devicon-rust-original", name = "Rust" },
+  { icon = "devicon-c-original", name = "C"},
   { icon = "devicon-java-plain", name = "Java" },
-  { icon = "devicon-cplusplus-plain", name = "C++" },
-  { icon = "devicon-html5-plain", name = "HTML5" }
+  { icon = "devicon-html5-plain", name = "HTML5" },
+  { icon = "devicon-tailwindcss-original", name = "TailWindCSS"},
+  { icon = "devicon-javascript-plain", name = "JavaScript" },
+  { icon = "devicon-bash-plain", name = "Bash"}
 ]
 
 # Bottom carousel row
 row2 = [
+  { icon = "devicon-kalilinux-original", name = "Kali" },
   { icon = "devicon-archlinux-plain", name = "Arch" },
+  { icon = "devicon-debian-plain", name = "Debian" },
+  { icon = "devicon-pfsense-original", name = "pfSense"},
   { icon = "devicon-docker-plain", name = "Docker" },
-  { icon = "devicon-kubernetes-plain", name = "Kubernetes" },
   { icon = "devicon-postgresql-plain", name = "PostgreSQL" },
   { icon = "devicon-mongodb-plain", name = "MongoDB" },
-  { icon = "devicon-nginx-original", name = "Nginx" }
+  { icon = "devicon-git-plain", name = "Git" },
+  { icon = "devicon-hugo-plain", name = "Hugo" },
+  { icon = "devicon-neovim-plain", name = "NeoVim" }
 ]
