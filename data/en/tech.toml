@@ -15,12 +15,10 @@ row1 = [
 
 # Bottom carousel row
 row2 = [
-  { icon = "devicon-react-original", name = "React" },
-  { icon = "devicon-nodejs-plain", name = "Node.js" },
+  { icon = "devicon-archlinux-plain", name = "Arch" },
   { icon = "devicon-docker-plain", name = "Docker" },
   { icon = "devicon-kubernetes-plain", name = "Kubernetes" },
   { icon = "devicon-postgresql-plain", name = "PostgreSQL" },
   { icon = "devicon-mongodb-plain", name = "MongoDB" },
-  { icon = "devicon-redis-plain", name = "Redis" },
   { icon = "devicon-nginx-original", name = "Nginx" }
 ]

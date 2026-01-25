@@ -3,7 +3,7 @@ title: "Understanding Windows PE Files"
 date: 2026-01-10T16:11:53-05:00
 lastmod: 2026-01-10T16:11:53-05:00
 draft: false
-tags: ["windows","pe-file"]
+tags: ["windows", "pe-file"]
 summary: "Technical deep-dive into Windows PE file format"
 externalUrl: ""
 ---

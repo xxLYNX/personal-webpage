@@ -3,7 +3,7 @@ title: "Machine Learning Malware Detection"
 date: 2026-01-01T22:11:48-05:00
 lastmod: 2026-01-01T22:11:48-05:00
 draft: false
-tags: ["malware","machine-learning","windows", "pe-file"]
+tags: ["malware", "machine-learning", "windows", "pe-file"]
 image: "/images/projects/pe101.png"
 description: "Research into applying machine learning for malware detection using static analysis of win PE files"
 github: "github.com/xxLYNX/pe-malware-research-project"
