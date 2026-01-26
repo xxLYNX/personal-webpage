@@ -4,10 +4,13 @@
   description = "Fresh cybersecurity masters graduate "
   profile_image = "/images/profile/headshot.jpg"
   
-  # Social links
-  github = "https://github.xxLYNX.com"
-  twitter = "https://x.com/ckelleyexe"
-  linkedin = "https://www.linkedin.com/in/cullen-kelley/"
-  email = "contact@example.com"
-  discord = "lynx0072"
+  # Social links - used by homepage and contact page
+  github = "https://github.com/xxLYNX"
   github_username = "xxLYNX"
+  twitter = "https://x.com/ckelleyexe"
+  twitter_username = "ckelleyexe"
+  linkedin = "https://www.linkedin.com/in/cullen-kelley/"
+  linkedin_username = "cullen-kelley"
+  email = "cullenscout1970@gmail.com"
+  discord = "lynx0072"
+

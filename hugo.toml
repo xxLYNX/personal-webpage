@@ -1,7 +1,7 @@
 baseURL = "https://example.com"
 languageCode = 'en-us'
-title = 'John Doe - Portfolio & Blog'
-theme = 'hugo-void' # Forked from hugo-noir
+title = 'Cullen Kelley - Portfolio & Blog'
+theme = 'hugo-void'
 
 # URL handling
 relativeURLs = true
@@ -21,7 +21,7 @@ defaultContentLanguageInSubdir = true # Creates URLs like /en/blog/
 [languages]
   [languages.en]
     languageName = "English"
-    title = "John Doe - Portfolio & Blog"
+    title = "Cullen Kelley - Portfolio & Blog"
     weight = 1
     contentDir = "content/en"
     [languages.en.menu]
@@ -104,96 +104,6 @@ defaultContentLanguageInSubdir = true # Creates URLs like /en/blog/
   category = "categories"
   tag = "tags"
 
-[params]
-  # Basic profile information - common across languages
-  # This is used by the theme for the author name in the footer, social links, etc.
-  name = "John Doe"
-  profile_image = "/images/profile_placeholder.jpg" # Place in your site's static/images/ directory
-  # Social and contact information
-  email = "john.doe@example.com"
-  github = "https://github.com/johndoe"
-  github_username = "johndoe"
-  linkedin = "https://linkedin.com/in/johndoe"
-  linkedin_username = "johndoe"
-  twitter = "https://twitter.com/johndoe"
-  twitter_username = "johndoe"
-  # Add other social links as needed by the theme or your content
-  # discord = "johndoe#1234"
-  # medium = "https://medium.com/@johndoe"
-  # leetcode = "https://leetcode.com/johndoe"
-  # monkeytype = "https://monkeytype.com/profile/johndoe"
-  # kaggle = "https://www.kaggle.com/johndoe"
-  # instagram = "https://instagram.com/johndoe"
-
-  # Example for adding items to the tech stack carousel
-  [params.tech]
-  row1 = [
-    { icon = "devicon-python-plain", name = "Python" },
-    { icon = "devicon-go-plain", name = "Go" },
-    { icon = "devicon-javascript-plain", name = "JavaScript" },
-    { icon = "devicon-typescript-plain", name = "TypeScript" },
-    { icon = "devicon-react-original", name = "React" },
-    { icon = "devicon-vuejs-plain", name = "Vue.js" },
-    { icon = "devicon-html5-plain", name = "HTML5" },
-    { icon = "devicon-css3-plain", name = "CSS3" }
-  ]
-  row2 = [
-    { icon = "devicon-docker-plain", name = "Docker" },
-    { icon = "devicon-kubernetes-plain", name = "Kubernetes" },
-    { icon = "devicon-nginx-original", name = "Nginx" },
-    { icon = "devicon-postgresql-plain", name = "PostgreSQL" },
-    { icon = "devicon-redis-plain", name = "Redis" },
-    { icon = "devicon-git-plain", name = "Git" },
-    { icon = "devicon-hugo-plain", name = "Hugo" },
-    { icon = "devicon-tailwindcss-plain", name = "TailwindCSS" }
-  ]
-
-  # Example for adding honors/awards (optional, adapt to theme features)
-  [[params.honors]]
-    institution = "Lorem University"
-    title = "Summa Cum Laude"
-    date = "May 2020"
-
-  [[params.honors]]
-    institution = "Ipsum Institute"
-    title = "Best Project Award"
-    date = "December 2019"
-
-  # Example for certifications (optional, adapt to theme features)
-  [[params.certifications]]
-    title = "Professional Widget Certification"
-    company = "Widgets Inc."
-    date = "Valid until Jan 2025"
-    url = "https://example.com/certification/123"
-
-  # Example for voluntary work (optional, adapt to theme features)
-  [[params.voluntary]]
-    role = "Community Helper"
-    organization = "Local Charity Group"
-    period = "2021 - Present"
-    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url = "https://example.com/community"
-
-# Main menu (used as a fallback if language-specific menus are not fully defined or if not using multilingual features)
-# For multilingual sites, it's generally better to define menus within each language block as shown above.
-[menu]
-  [[menu.main]]
-    name = "About"
-    pageRef = "/about"
-    weight = 1
-  [[menu.main]]
-    name = "Experience"
-    pageRef = "/experience"
-    weight = 2
-  [[menu.main]]
-    name = "Projects"
-    pageRef = "/projects"
-    weight = 3
-  [[menu.main]]
-    name = "Blog"
-    pageRef = "/blogs"
-    weight = 4
-  [[menu.main]]
-    name = "Contact Me" # Note: "Contact" is used in language-specific menus above for consistency
-    pageRef = "/contact"
-    weight = 5 
+# NOTE: Author and social information is now managed in data/en/author.toml
+# This allows for better multilingual support and follows Hugo best practices
+# The [params] section is no longer needed as the theme uses data files 
