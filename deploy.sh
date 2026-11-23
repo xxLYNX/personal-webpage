@@ -18,7 +18,12 @@ fi
 # Step 1: Build CSS in theme
 echo -e "\n${BLUE}📦 Building Tailwind CSS...${NC}"
 cd themes/hugo-void
-npm run build:css
+if ! command -v pnpm >/dev/null 2>&1; then
+    echo -e "${RED}Error: pnpm not found on PATH.${NC}"
+    exit 1
+fi
+pnpm install --frozen-lockfile
+pnpm run build:css
 
 # Step 2: Check for theme changes and commit/push
 echo -e "\n${BLUE}🔍 Checking for theme changes...${NC}"

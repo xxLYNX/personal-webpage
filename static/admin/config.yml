@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.271.2/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: xxLYNX/personal-webpage
+  branch: master
+
+publish_mode: editorial_workflow
+
+# Authentication is configured in a later gate; do not add tokens here.
+media_folder: static/images
+public_folder: /images
+
+collections:
+  - name: blogs
+    label: Blog
+    label_singular: Blog Post
+    folder: content/en/blogs
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    # Hugo section list page (_index.md) is excluded from this collection by default.
+    fields:
+      - { name: title, label: Title, widget: string }
+      - name: date
+        label: Date
+        widget: datetime
+      - name: lastmod
+        label: Last Modified
+        widget: datetime
+        required: false
+      - { name: draft, label: Draft, widget: boolean, default: false }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: summary, label: Summary, widget: string, required: false }
+      - { name: externalUrl, label: External URL, widget: string, required: false }
+      - { name: body, label: Body, widget: markdown }

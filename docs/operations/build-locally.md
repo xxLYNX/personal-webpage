@@ -2,6 +2,8 @@
 
 Deterministic build for the Hugo site with the **hugo-void** theme (Git submodule at `themes/hugo-void`).
 
+**Package manager policy:** only **pnpm** is used for Node dependencies (`pnpm install --frozen-lockfile`, `pnpm run`). Do not use npm, npx, or yarn when running builds for this site.
+
 ## Prerequisites
 
 | Tool | Version tested on pluto | Notes |
@@ -9,13 +11,13 @@ Deterministic build for the Hugo site with the **hugo-void** theme (Git submodul
 | Git | any recent | Submodule must be initialized |
 | Hugo Extended | **v0.170.0** | `nix shell nixpkgs#hugo` on NixOS |
 | Node.js | **v24.22.2** | `nix shell nixpkgs#nodejs` |
-| npm | **11.19.1** | Bundled with nixpkgs Node |
+| pnpm | **12.9.0** | `nix shell nixpkgs#pnpm` (matches theme `packageManager`) |
 
-On NixOS, Node and Hugo are often **not** on the default `PATH`. Use a single shell:
+On NixOS, tools are often **not** on the default `PATH`. Use one shell:
 
 ```bash
 cd /home/voyager/Projects/personal-webpage
-nix shell nixpkgs#hugo nixpkgs#nodejs --command ./scripts/build-site.sh
+nix shell nixpkgs#hugo nixpkgs#nodejs nixpkgs#pnpm --command ./scripts/build-site.sh
 ```
 
 ## One-command build
@@ -30,35 +32,44 @@ The script:
 
 1. Resolves the repository root from its own location (caller cwd does not matter).
 2. Runs `git submodule update --init --recursive` for `themes/hugo-void`.
-3. Runs `npm ci` and `npm run build:css` inside the theme (uses `package-lock.json`).
-4. Runs `hugo --minify` with output in `public/`.
+3. Runs `pnpm install --frozen-lockfile` in the theme (requires `pnpm-lock.yaml`).
+4. Runs `pnpm run build:css`.
+5. Runs `hugo --minify` with output in `public/`.
 
-**Failure on missing layouts:** If Hugo prints `found no layout file`, the build script exits non-zero even when Hugo’s exit code is 0. Deprecation warnings alone do not fail the build.
+**Failure on missing layouts:** If Hugo prints `found no layout file`, the build script exits non-zero. Deprecation warnings alone do not fail the build.
 
 ## Smoke test
 
-After a successful build:
-
 ```bash
-nix shell nixpkgs#hugo nixpkgs#nodejs --command ./scripts/smoke-test.sh
+nix shell nixpkgs#hugo nixpkgs#nodejs nixpkgs#pnpm --command ./scripts/smoke-test.sh
 ```
 
-Checks non-empty HTML for:
+Checks non-empty HTML with basic structure for key routes, `public/css/style.css`, CMS static assets (`public/admin/*`), and a minimum HTML file count.
 
-- `/en/` → `public/en/index.html`
-- `/en/blogs/understanding-pe-files/`
-- `/en/projects/pe-trainer/`
-- `/en/resume/`
+## Policy check (no npm in workflows)
 
-Also verifies `public/css/style.css` exists and that the home page links to it.
+```bash
+./scripts/check-package-manager-policy.sh
+```
+
+## Dependency audit (theme)
+
+Recorded findings only — do not auto-upgrade to silence audit output.
+
+```bash
+cd themes/hugo-void
+pnpm audit
+```
+
+Exit code may be non-zero when vulnerabilities are reported; document and address in a planned upgrade, not ad hoc bumps.
 
 ## Preview locally
 
 ```bash
-nix shell nixpkgs#hugo nixpkgs#nodejs --command sh -c './scripts/build-site.sh && hugo server --source .'
+nix shell nixpkgs#hugo nixpkgs#nodejs nixpkgs#pnpm --command sh -c './scripts/build-site.sh && hugo server --source .'
 ```
 
-Open the URL Hugo prints (typically `http://localhost:1313/`). With `defaultContentLanguageInSubdir = true`, content lives under `/en/`.
+Content is under `/en/`. CMS admin static files load at `/admin/` (see [cms.md](./cms.md)).
 
 ## Submodule troubleshooting
 
@@ -67,9 +78,10 @@ Empty `themes/hugo-void/` causes Hugo layout warnings and almost no HTML output:
 ```bash
 git submodule update --init --recursive
 ls themes/hugo-void/layouts
+ls themes/hugo-void/pnpm-lock.yaml
 ```
 
-Fresh clone:
+Fresh clone (requires **both** repos to have the submodule commit on the remote — see Gate 1 report if the theme pointer is not yet pushed):
 
 ```bash
 git clone --recurse-submodules <repository-url>
@@ -77,10 +89,7 @@ git clone --recurse-submodules <repository-url>
 
 ## URL / baseURL notes (preview vs production)
 
-`hugo.toml` currently sets `baseURL = "https://example.com"` with `relativeURLs = true` and `canonifyURLs = true`. **Do not change baseURL** until a production custom domain is approved (see execution plan).
-
-- **Local `hugo server`:** Pages work with relative asset URLs.
-- **Future Cloudflare Pages preview (`*.pages.dev`):** Set or override `baseURL` per environment in a later gate; avoid baking preview URLs into production canonicals.
+`hugo.toml` sets `baseURL = "https://example.com"` with `relativeURLs = true` and `canonifyURLs = true`. **Do not change baseURL** until a production custom domain is approved.
 
 ## Generated artifacts (do not commit)
 
@@ -89,10 +98,7 @@ git clone --recurse-submodules <repository-url>
 | `public/` | yes (root `.gitignore`) |
 | `resources/` | yes |
 | `themes/hugo-void/node_modules/` | yes (theme `.gitignore`) |
-| `themes/hugo-void/static/css/style.css` | tracked in theme repo after `build:css` |
-
-Run `git status` after building; only intentional source edits should appear staged.
 
 ## Legacy script
 
-`deploy.sh` at the repo root is an older interactive workflow (commits/pushes theme and main repo). **Gate 0 uses `scripts/build-site.sh`** instead. `deploy.sh` is unchanged.
+`deploy.sh` at the repo root still supports an interactive git-push workflow; its CSS step uses **pnpm**. Prefer `scripts/build-site.sh` for reproducible builds.

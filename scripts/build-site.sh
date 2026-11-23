@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Reproducible Hugo + Tailwind build for personal-webpage.
-# Tested: Hugo v0.170.0, Node.js v24.x (see docs/operations/build-locally.md).
+# Tested: Hugo v0.170.0, Node.js v24.x, pnpm v12.9.0 (see docs/operations/build-locally.md).
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -22,8 +22,8 @@ if ! command -v hugo >/dev/null 2>&1; then
   exit 1
 fi
 
-if ! command -v npm >/dev/null 2>&1; then
-  echo "error: npm not found on PATH (tested with nixpkgs#nodejs 24.x)" >&2
+if ! command -v pnpm >/dev/null 2>&1; then
+  echo "error: pnpm not found on PATH (tested with nixpkgs#pnpm 12.9.0)" >&2
   exit 1
 fi
 
@@ -32,24 +32,37 @@ if ! command -v node >/dev/null 2>&1; then
   exit 1
 fi
 
+if [[ ! -f "${THEME_DIR}/pnpm-lock.yaml" ]]; then
+  echo "error: ${THEME_DIR}/pnpm-lock.yaml not found; theme must use pnpm lockfile" >&2
+  exit 1
+fi
+
 echo "==> Repository: ${REPO_ROOT}"
 echo "==> Hugo: $(hugo version)"
 echo "==> Node: $(node --version)"
-echo "==> npm: $(npm --version)"
+echo "==> pnpm: $(pnpm --version)"
 
 echo "==> Ensuring theme submodule is present"
-git -C "${REPO_ROOT}" submodule update --init --recursive themes/hugo-void
+git -C "${REPO_ROOT}" submodule sync --recursive themes/hugo-void
+sub_status="$(git -C "${REPO_ROOT}" submodule status themes/hugo-void 2>/dev/null || true)"
+if [[ ! -f "${THEME_DIR}/layouts/_default/baseof.html" ]]; then
+  git -C "${REPO_ROOT}" submodule update --init --recursive themes/hugo-void
+elif [[ "${sub_status}" == -* ]]; then
+  git -C "${REPO_ROOT}" submodule update --init --recursive themes/hugo-void
+elif [[ "${sub_status}" == +* ]]; then
+  echo "==> Theme checkout is ahead of parent gitlink (local development); not resetting submodule"
+fi
 
-echo "==> Installing theme Node dependencies (npm ci)"
+echo "==> Installing theme dependencies (pnpm install --frozen-lockfile)"
 (
   cd "${THEME_DIR}"
-  npm ci
+  pnpm install --frozen-lockfile
 )
 
 echo "==> Building Tailwind CSS (themes/hugo-void)"
 (
   cd "${THEME_DIR}"
-  npm run build:css
+  pnpm run build:css
 )
 
 HUGO_LOG="$(mktemp)"
