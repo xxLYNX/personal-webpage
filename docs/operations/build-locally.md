@@ -31,10 +31,10 @@ From any directory:
 The script:
 
 1. Resolves the repository root from its own location (caller cwd does not matter).
-2. Runs `git submodule update --init --recursive` for `themes/hugo-void`.
-3. Runs `pnpm install --frozen-lockfile` in the theme (requires `pnpm-lock.yaml`).
-4. Runs `pnpm run build:css`.
-5. Runs `hugo --minify` with output in `public/`.
+2. Initializes `themes/hugo-void` if missing, then **requires** the theme checkout to match the exact commit recorded in the parent gitlink (`HEAD:themes/hugo-void`).
+3. On mismatch, **exits with an error** (no reset/checkout of the submodule). Local uncommitted theme changes on the **correct** commit are not discarded.
+4. Optional override for active theme work only: `ALLOW_THEME_SUBMODULE_DRIFT=1` (off by default; not for CI).
+5. Runs `pnpm install --frozen-lockfile`, `pnpm run build:css`, and `hugo --minify` into `public/`.
 
 **Failure on missing layouts:** If Hugo prints `found no layout file`, the build script exits non-zero. Deprecation warnings alone do not fail the build.
 
@@ -99,6 +99,14 @@ git clone --recurse-submodules <repository-url>
 | `resources/` | yes |
 | `themes/hugo-void/node_modules/` | yes (theme `.gitignore`) |
 
-## Legacy script
+## Submodule pin negative test
 
-`deploy.sh` at the repo root still supports an interactive git-push workflow; its CSS step uses **pnpm**. Prefer `scripts/build-site.sh` for reproducible builds.
+```bash
+./scripts/test-submodule-pin-negative.sh
+```
+
+Expect exit **0** after temporarily checking out a non-pinned theme commit and confirming `build-site.sh` fails with `theme submodule commit mismatch`.
+
+## deploy.sh (build only)
+
+`deploy.sh` runs `scripts/build-site.sh` and `scripts/smoke-test.sh` only. It does **not** `git add`, `commit`, or `push`.

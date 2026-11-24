@@ -12,8 +12,8 @@ if [[ ! -f "${REPO_ROOT}/hugo.toml" ]]; then
   exit 1
 fi
 
-if [[ ! -f "${THEME_DIR}/package.json" ]]; then
-  echo "error: theme missing at ${THEME_DIR}; run: git submodule update --init --recursive" >&2
+if ! command -v git >/dev/null 2>&1; then
+  echo "error: git not found on PATH" >&2
   exit 1
 fi
 
@@ -32,25 +32,48 @@ if ! command -v node >/dev/null 2>&1; then
   exit 1
 fi
 
-if [[ ! -f "${THEME_DIR}/pnpm-lock.yaml" ]]; then
-  echo "error: ${THEME_DIR}/pnpm-lock.yaml not found; theme must use pnpm lockfile" >&2
-  exit 1
-fi
-
 echo "==> Repository: ${REPO_ROOT}"
 echo "==> Hugo: $(hugo version)"
 echo "==> Node: $(node --version)"
 echo "==> pnpm: $(pnpm --version)"
 
-echo "==> Ensuring theme submodule is present"
+echo "==> Theme submodule (pinned to parent gitlink)"
 git -C "${REPO_ROOT}" submodule sync --recursive themes/hugo-void
-sub_status="$(git -C "${REPO_ROOT}" submodule status themes/hugo-void 2>/dev/null || true)"
-if [[ ! -f "${THEME_DIR}/layouts/_default/baseof.html" ]]; then
+
+EXPECTED_THEME_SHA="$(git -C "${REPO_ROOT}" rev-parse "HEAD:themes/hugo-void")"
+if [[ -z "${EXPECTED_THEME_SHA}" ]]; then
+  echo "error: could not read themes/hugo-void gitlink from parent HEAD" >&2
+  exit 1
+fi
+echo "==> Parent records theme commit: ${EXPECTED_THEME_SHA}"
+
+sub_line="$(git -C "${REPO_ROOT}" submodule status themes/hugo-void 2>/dev/null || true)"
+if [[ "${sub_line}" == -* ]] || [[ ! -f "${THEME_DIR}/layouts/_default/baseof.html" ]]; then
+  echo "==> Initializing themes/hugo-void submodule"
   git -C "${REPO_ROOT}" submodule update --init --recursive themes/hugo-void
-elif [[ "${sub_status}" == -* ]]; then
-  git -C "${REPO_ROOT}" submodule update --init --recursive themes/hugo-void
-elif [[ "${sub_status}" == +* ]]; then
-  echo "==> Theme checkout is ahead of parent gitlink (local development); not resetting submodule"
+fi
+
+if [[ ! -f "${THEME_DIR}/package.json" ]] || [[ ! -f "${THEME_DIR}/pnpm-lock.yaml" ]]; then
+  echo "error: theme at ${THEME_DIR} is incomplete; expected commit ${EXPECTED_THEME_SHA}" >&2
+  echo "error: run: git submodule update --init themes/hugo-void" >&2
+  exit 1
+fi
+
+ACTUAL_THEME_SHA="$(git -C "${THEME_DIR}" rev-parse HEAD)"
+echo "==> Theme checkout commit: ${ACTUAL_THEME_SHA}"
+
+if [[ "${ACTUAL_THEME_SHA}" != "${EXPECTED_THEME_SHA}" ]]; then
+  if [[ "${ALLOW_THEME_SUBMODULE_DRIFT:-0}" == "1" ]]; then
+    echo "WARNING: ALLOW_THEME_SUBMODULE_DRIFT=1 — building theme ${ACTUAL_THEME_SHA}, not parent pin ${EXPECTED_THEME_SHA}" >&2
+  else
+    echo "error: theme submodule commit mismatch" >&2
+    echo "error:   parent pin (HEAD:themes/hugo-void): ${EXPECTED_THEME_SHA}" >&2
+    echo "error:   checkout (themes/hugo-void HEAD):    ${ACTUAL_THEME_SHA}" >&2
+    echo "error: align the submodule without discarding work: git submodule update --init themes/hugo-void" >&2
+    echo "error: or commit a new parent gitlink after bumping the submodule intentionally" >&2
+    echo "error: explicit theme development override (local only): ALLOW_THEME_SUBMODULE_DRIFT=1" >&2
+    exit 1
+  fi
 fi
 
 echo "==> Installing theme dependencies (pnpm install --frozen-lockfile)"

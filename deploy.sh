@@ -1,71 +1,19 @@
-#!/bin/bash
-set -e  # Exit on any error
+#!/usr/bin/env bash
+# Local build + smoke verification only. Does not commit, push, or alter Git history.
+set -euo pipefail
 
-echo "Starting deployment process..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="${SCRIPT_DIR}"
 
-# Colors for output
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-
-# Check if we're in the right directory
-if [ ! -f "hugo.toml" ]; then
-    echo -e "${RED}Error: hugo.toml not found. Run this script from the project root.${NC}"
-    exit 1
+if [[ ! -f "${REPO_ROOT}/hugo.toml" ]]; then
+  echo "error: hugo.toml not found. Run this script from the project root." >&2
+  exit 1
 fi
 
-# Step 1: Build CSS in theme
-echo -e "\n${BLUE}📦 Building Tailwind CSS...${NC}"
-cd themes/hugo-void
-if ! command -v pnpm >/dev/null 2>&1; then
-    echo -e "${RED}Error: pnpm not found on PATH.${NC}"
-    exit 1
-fi
-pnpm install --frozen-lockfile
-pnpm run build:css
+echo "==> Running reproducible site build (no Git writes)"
+"${REPO_ROOT}/scripts/build-site.sh"
 
-# Step 2: Check for theme changes and commit/push
-echo -e "\n${BLUE}🔍 Checking for theme changes...${NC}"
-if [[ -n $(git status --porcelain) ]]; then
-    echo -e "${GREEN}Changes detected in theme${NC}"
-    git add -A
-    
-    # Prompt for commit message or use default
-    echo -n "Enter commit message (or press Enter for default): "
-    read THEME_MSG
-    if [ -z "$THEME_MSG" ]; then
-        THEME_MSG="Update theme styles and layouts"
-    fi
-    
-    git commit -m "$THEME_MSG"
-    git push
-    echo -e "${GREEN}✓ Theme changes pushed${NC}"
-else
-    echo "No changes in theme"
-fi
+echo "==> Running smoke tests"
+"${REPO_ROOT}/scripts/smoke-test.sh"
 
-# Step 3: Return to main repo and update submodule
-echo -e "\n${BLUE}🔄 Updating main repository...${NC}"
-cd ../..
-
-# Step 4: Check for main repo changes and commit/push
-if [[ -n $(git status --porcelain) ]]; then
-    echo -e "${GREEN}Changes detected in main repository${NC}"
-    git add -A
-    
-    # Prompt for commit message or use default
-    echo -n "Enter commit message (or press Enter for default): "
-    read MAIN_MSG
-    if [ -z "$MAIN_MSG" ]; then
-        MAIN_MSG="Update content and theme"
-    fi
-    
-    git commit -m "$MAIN_MSG"
-    git push
-    echo -e "${GREEN}✓ Main repository changes pushed${NC}"
-else
-    echo "No changes in main repository"
-fi
-
-echo -e "\n${GREEN}✅ Deployment complete!${NC}"
+echo "==> Build and smoke checks passed. Publish via your normal Git/CI workflow (this script does not push)."

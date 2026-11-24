@@ -7,8 +7,8 @@ cd themes/hugo-void
 pnpm audit
 ```
 
-**Recorded:** 2026-11-23 on pluto  
-**pnpm:** 12.9.0  
+**Recorded:** 2026-11-23 on pluto
+**pnpm:** 12.9.0
 **Direct devDependency:** `tailwindcss@3.4.17` (pinned in `package.json`)
 
 **Result:** `pnpm audit` exit code **1** — **25 vulnerabilities** reported (1 low, 9 moderate, 15 high).
