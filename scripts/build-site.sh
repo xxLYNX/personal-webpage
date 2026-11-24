@@ -5,7 +5,12 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-THEME_DIR="${REPO_ROOT}/themes/hugo-void"
+THEME_DIR="${THEME_SUBMODULE_PATH:-${REPO_ROOT}/themes/hugo-void}"
+USING_WORKTREE_OVERRIDE=false
+if [[ -n "${THEME_SUBMODULE_PATH:-}" ]]; then
+  USING_WORKTREE_OVERRIDE=true
+  echo "==> THEME_SUBMODULE_PATH override (tests only): ${THEME_DIR}"
+fi
 
 if [[ ! -f "${REPO_ROOT}/hugo.toml" ]]; then
   echo "error: hugo.toml not found at repo root (${REPO_ROOT})" >&2
@@ -47,10 +52,12 @@ if [[ -z "${EXPECTED_THEME_SHA}" ]]; then
 fi
 echo "==> Parent records theme commit: ${EXPECTED_THEME_SHA}"
 
-sub_line="$(git -C "${REPO_ROOT}" submodule status themes/hugo-void 2>/dev/null || true)"
-if [[ "${sub_line}" == -* ]] || [[ ! -f "${THEME_DIR}/layouts/_default/baseof.html" ]]; then
-  echo "==> Initializing themes/hugo-void submodule"
-  git -C "${REPO_ROOT}" submodule update --init --recursive themes/hugo-void
+if [[ "${USING_WORKTREE_OVERRIDE}" == false ]]; then
+  sub_line="$(git -C "${REPO_ROOT}" submodule status themes/hugo-void 2>/dev/null || true)"
+  if [[ "${sub_line}" == -* ]] || [[ ! -f "${THEME_DIR}/layouts/_default/baseof.html" ]]; then
+    echo "==> Initializing themes/hugo-void submodule"
+    git -C "${REPO_ROOT}" submodule update --init --recursive themes/hugo-void
+  fi
 fi
 
 if [[ ! -f "${THEME_DIR}/package.json" ]] || [[ ! -f "${THEME_DIR}/pnpm-lock.yaml" ]]; then

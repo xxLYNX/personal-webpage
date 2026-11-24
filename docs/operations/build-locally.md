@@ -105,7 +105,11 @@ git clone --recurse-submodules <repository-url>
 ./scripts/test-submodule-pin-negative.sh
 ```
 
-Expect exit **0** after temporarily checking out a non-pinned theme commit and confirming `build-site.sh` fails with `theme submodule commit mismatch`.
+Uses a **disposable git worktree**; the main `themes/hugo-void` checkout is not modified.
+
+- Exit **0** — mismatch rejected and submodule state preserved.
+- Exit **1** — test failure.
+- Exit **77** — skip (insufficient history for a wrong commit); **not** a pass in strict CI.
 
 ## deploy.sh (build only)
 

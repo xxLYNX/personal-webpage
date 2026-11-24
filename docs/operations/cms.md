@@ -24,7 +24,7 @@ After `hugo` build, the admin UI is at `/admin/` (also `/en/admin/` may redirect
 
 ## Authentication
 
-**Not configured in Gate 1.** The GitHub backend requires OAuth or a GitHub App in a later gate. Visiting `/admin/` may load the shell but login/save will fail until credentials are set up by the user in the browser.
+Gate 2: sign in with a **fine-grained GitHub PAT** in the browser (**Sign in with token**). Minimum repo permissions: **Contents** (read/write) and **Pull requests** (read/write) on `xxLYNX/personal-webpage`. See [cms-editorial-workflow.md](./cms-editorial-workflow.md). No tokens in this repository.
 
 ## Recovery without the CMS
 
